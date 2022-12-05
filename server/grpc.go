@@ -3,10 +3,10 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/tpodg/go-grpc-testing/server/grpc/pb"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/health"
 	"google.golang.org/grpc/health/grpc_health_v1"
-	"grpc-server/grpc/pb"
 	"log"
 	"net"
 )

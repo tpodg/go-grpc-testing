@@ -1,4 +1,4 @@
-module grpc-server
+module github.com/tpodg/go-grpc-testing/server
 
 go 1.19
 

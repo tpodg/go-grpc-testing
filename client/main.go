@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
-	"grpc-client/grpc/pb"
+	"github.com/tpodg/go-grpc-testing/client/grpc/pb"
 	"log"
 	"net/http"
 	"os"

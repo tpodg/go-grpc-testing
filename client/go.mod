@@ -1,4 +1,4 @@
-module grpc-client
+module github.com/tpodg/go-grpc-testing/client
 
 go 1.19
 

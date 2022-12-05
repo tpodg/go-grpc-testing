@@ -2,9 +2,9 @@ package main
 
 import (
 	"context"
+	"github.com/tpodg/go-grpc-testing/client/grpc/pb"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
-	"grpc-client/grpc/pb"
 	"io"
 	"log"
 	"net/http"
@@ -53,6 +53,7 @@ func (h handler) sendRest(w http.ResponseWriter, r *http.Request) {
 		log.Println("error occurred:", err)
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
+		return
 	} else {
 		defer res.Body.Close()
 		body, err := io.ReadAll(res.Body)
@@ -60,6 +61,7 @@ func (h handler) sendRest(w http.ResponseWriter, r *http.Request) {
 			log.Println("error reading body:", err)
 			w.WriteHeader(http.StatusInternalServerError)
 			w.Write([]byte(err.Error()))
+			return
 		}
 
 		log.Println("response:", string(body))
