@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option go_package = "grpc/pb";
+
+service DemoService {
+  rpc Send(Request) returns (Response);
+}
+
+message Request {
+  string value = 1;
+}
+
+message Response {
+  string value = 1;
+}
