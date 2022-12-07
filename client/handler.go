@@ -17,9 +17,9 @@ type handler struct {
 	restClient *restClient
 }
 
-func newHandler() handler {
+func newHandler(cfg cfg) handler {
 	opts := []grpc.DialOption{grpc.WithTransportCredentials(insecure.NewCredentials())}
-	conn, err := grpc.Dial("localhost:9090", opts...)
+	conn, err := grpc.Dial(cfg.Grpc.Target, opts...)
 	if err != nil {
 		log.Fatal("failed to dial", err)
 	}
@@ -33,6 +33,7 @@ func newHandler() handler {
 			Client: &http.Client{
 				Timeout: 3 * time.Second,
 			},
+			url: cfg.Rest.Target,
 		},
 	}
 	h.router.HandleFunc("/grpc", h.sendGrpc)
@@ -48,7 +49,7 @@ func (h handler) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 func (h handler) sendRest(w http.ResponseWriter, r *http.Request) {
 	log.Printf("serving %s /restCfg", r.Method)
 
-	res, err := h.restClient.Get("http://localhost:8081/rest")
+	res, err := h.restClient.Get(h.restClient.url + "/rest")
 	if err != nil {
 		log.Println("error occurred:", err)
 		w.WriteHeader(http.StatusInternalServerError)

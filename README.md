@@ -9,5 +9,5 @@
   * ANY /grpc (with optional query parameter 'value') calls server over grpc
 
 ### Client Env
-* GRPC_TARGET: Address of the grpc server
-* REST_TARGET: Address of the rest server
+* GRPC_TARGET: Address of the grpc server (default: localhost:9090)
+* REST_TARGET: Address of the rest server (default: http://localhost:8081)

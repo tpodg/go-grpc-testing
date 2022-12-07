@@ -17,6 +17,7 @@ type grpcClient struct {
 
 type restClient struct {
 	*http.Client
+	url string
 }
 
 func main() {
@@ -25,7 +26,7 @@ func main() {
 			Target: "localhost:9090",
 		},
 		Rest: restCfg{
-			Target: "localhost:8081",
+			Target: "http://localhost:8081",
 		},
 	}
 	config.Parse()
@@ -33,7 +34,7 @@ func main() {
 
 	s := http.Server{
 		Addr:    ":8080",
-		Handler: newHandler(),
+		Handler: newHandler(config),
 	}
 
 	go func() {
