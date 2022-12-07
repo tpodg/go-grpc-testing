@@ -12,6 +12,7 @@ type cfg struct {
 
 type grpcCfg struct {
 	Target string
+	Tls    bool
 }
 
 type restCfg struct {

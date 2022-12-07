@@ -10,4 +10,5 @@
 
 ### Client Env
 * GRPC_TARGET: Address of the grpc server (default: localhost:9090)
+* GRPC_TLS: Use TLS (default: false)
 * REST_TARGET: Address of the rest server (default: http://localhost:8081)

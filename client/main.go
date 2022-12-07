@@ -24,6 +24,7 @@ func main() {
 	config := cfg{
 		Grpc: grpcCfg{
 			Target: "localhost:9090",
+			Tls:    false,
 		},
 		Rest: restCfg{
 			Target: "http://localhost:8081",

@@ -2,8 +2,10 @@ package main
 
 import (
 	"context"
+	"crypto/tls"
 	"github.com/tpodg/go-grpc-testing/client/grpc/pb"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/insecure"
 	"io"
 	"log"
@@ -18,7 +20,12 @@ type handler struct {
 }
 
 func newHandler(cfg cfg) handler {
-	opts := []grpc.DialOption{grpc.WithTransportCredentials(insecure.NewCredentials())}
+	var opts []grpc.DialOption
+	if cfg.Grpc.Tls {
+		opts = append(opts, grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{})))
+	} else {
+		opts = append(opts, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	}
 	conn, err := grpc.Dial(cfg.Grpc.Target, opts...)
 	if err != nil {
 		log.Fatal("failed to dial", err)
